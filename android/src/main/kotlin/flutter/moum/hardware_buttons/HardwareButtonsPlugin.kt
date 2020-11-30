@@ -8,6 +8,7 @@ class HardwareButtonsPlugin {
         private const val VOLUME_BUTTON_CHANNEL_NAME = "flutter.moum.hardware_buttons.volume"
         private const val HOME_BUTTON_CHANNEL_NAME = "flutter.moum.hardware_buttons.home"
         private const val LOCK_BUTTON_CHANNEL_NAME = "flutter.moum.hardware_buttons.lock"
+       // private const val SOS_BUTTON_CHANNEL_NAME = "flutter.moum.hardware_buttons.sos"
 
         @JvmStatic
         fun registerWith(registrar: PluginRegistry.Registrar) {
@@ -24,6 +25,9 @@ class HardwareButtonsPlugin {
 
             val lockButtonChannel = EventChannel(registrar.messenger(), LOCK_BUTTON_CHANNEL_NAME)
             lockButtonChannel.setStreamHandler(LockButtonStreamHandler(activity))
+
+         //   val sosButtonChannel = EventChannel(registrar.messenger(), SOS_BUTTON_CHANNEL_NAME)
+         //   sosButtonChannel.setStreamHandler(SOSButtonStreamHandler(activity))
         }
     }
 }

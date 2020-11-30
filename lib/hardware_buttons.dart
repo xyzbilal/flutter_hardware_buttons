@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 const _VOLUME_BUTTON_CHANNEL_NAME = 'flutter.moum.hardware_buttons.volume';
 const _HOME_BUTTON_CHANNEL_NAME = 'flutter.moum.hardware_buttons.home';
 const _LOCK_BUTTON_CHANNEL_NAME = 'flutter.moum.hardware_buttons.lock';
+const _SOS_BUTTON_CHANNEL_NAME = 'flutter.moum.hardware_buttons.sos';
 
 const EventChannel _volumeButtonEventChannel =
     EventChannel(_VOLUME_BUTTON_CHANNEL_NAME);
@@ -12,6 +13,8 @@ const EventChannel _homeButtonEventChannel =
     EventChannel(_HOME_BUTTON_CHANNEL_NAME);
 const EventChannel _lockButtonEventChannel =
     EventChannel(_LOCK_BUTTON_CHANNEL_NAME);
+const EventChannel _sosButtonEventChannel =
+    EventChannel(_SOS_BUTTON_CHANNEL_NAME);
 
 Stream<VolumeButtonEvent> _volumeButtonEvents;
 
@@ -49,6 +52,18 @@ Stream<LockButtonEvent> get lockButtonEvents {
   return _lockButtonEvents;
 }
 
+Stream<SOSButtonEvent> _sosButtonEvents;
+
+/// A broadcast stream of lock button events
+Stream<SOSButtonEvent> get sosButtonEvents {
+  if (_sosButtonEvents == null) {
+    _sosButtonEvents = _sosButtonEventChannel
+        .receiveBroadcastStream()
+        .map((dynamic event) => SOSButtonEvent.INSTANCE);
+  }
+  return _sosButtonEvents;
+}
+
 /// Volume button events
 /// Applies both to device and earphone buttons
 enum VolumeButtonEvent {
@@ -83,4 +98,11 @@ class LockButtonEvent {
   static const INSTANCE = LockButtonEvent();
 
   const LockButtonEvent();
+}
+
+/// SOS button event
+class SOSButtonEvent {
+  static const INSTANCE = SOSButtonEvent();
+
+  const SOSButtonEvent();
 }
