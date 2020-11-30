@@ -72,6 +72,9 @@ enum VolumeButtonEvent {
 
   /// Volume Down button event
   VOLUME_DOWN,
+
+  /// SOS button event
+  SOS,
 }
 
 VolumeButtonEvent _eventToVolumeButtonEvent(dynamic event) {
@@ -79,8 +82,12 @@ VolumeButtonEvent _eventToVolumeButtonEvent(dynamic event) {
     return VolumeButtonEvent.VOLUME_UP;
   } else if (event == 25) {
     return VolumeButtonEvent.VOLUME_DOWN;
-  } else {
-    throw Exception('Invalid volume button event');
+  }
+  else if(event == 286){
+    return VolumeButtonEvent.SOS;
+  }
+  else {
+    throw Exception('Invalid button event');
   }
 }
 
