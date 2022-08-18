@@ -9,7 +9,7 @@ authors:
 homepage: https://github.com/flutter-moum/flutter_hardware_buttons
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.16.0 <3.0.0"
 
 dependencies:
   flutter:
